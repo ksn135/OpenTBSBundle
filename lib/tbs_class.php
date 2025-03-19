@@ -4005,7 +4005,7 @@ static function meth_Misc_ToStr($Value) {
 	} elseif(is_object($Value)) {
 		if (method_exists($Value,'__toString')) {
 			return $Value->__toString();
-		} elseif (is_a($Value, 'DateTime')) {
+		} elseif (is_a($Value, 'DateTimeInterface')) {
 			// ISO date-time format
 			return $Value->format('c');
 		}
@@ -4109,8 +4109,8 @@ function meth_Misc_DateFormat(&$Value, $Frm) {
 
 	if ($Value==='') return '';
 	
-	// Note : DateTime object is supported since PHP 5.2
-	// So we could simplify this function using only DateTime instead of timestamp.
+	// Note : DateTime Immobject is supported since PHP 5.2
+	// So we could simplify this function using only DateTime Imminstead of timestamp.
 	
 	// Now we try to get the timestamp
 	if (is_string($Value)) {
@@ -4124,10 +4124,10 @@ function meth_Misc_DateFormat(&$Value, $Frm) {
 				// Special fix for PHP 32-bit and date > '2038-01-19 03:14:07' => strtotime() failes
 				if (PHP_INT_SIZE === 4) { // 32-bit
 					try {
-						$date = new DateTime($Value);
+						$date = new DateTimeImmutable($Value);
 						return $date->format($Frm['str_us']);
 						// 'locale' cannot be supported in this case because strftime() has to equilavent with DateTime
-					} catch (Exception $e) {
+Imm					} catch (Exception $e) {
 						// We take an arbitrary value in order to avoid formating error
 						$Value = 0; // '1970-01-01'
 						// echo $e->getMessage();
