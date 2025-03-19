@@ -4127,7 +4127,7 @@ function meth_Misc_DateFormat(&$Value, $Frm) {
 						$date = new DateTimeImmutable($Value);
 						return $date->format($Frm['str_us']);
 						// 'locale' cannot be supported in this case because strftime() has to equilavent with DateTime
-Imm					} catch (Exception $e) {
+					} catch (Exception $e) {
 						// We take an arbitrary value in order to avoid formating error
 						$Value = 0; // '1970-01-01'
 						// echo $e->getMessage();
